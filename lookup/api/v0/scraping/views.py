@@ -9,21 +9,20 @@ class LicenseLookupView(APIView):
 
     def get(self, request, *args, **kwargs):
 
-        fname = request.query_params.get('fname')
-        lname = request.query_params.get('lname')
-        state = request.query_params.get('state')
-        county = request.query_params.get('county')
+        first_name_p = request.query_params.get('first_name_p')
+        last_name_p = request.query_params.get('last_name_p')
+        state_p = request.query_params.get('state_p')
+        county_p = request.query_params.get('county_p')
         cont_id = request.query_params.get('cont_id')
 
-        if any(map(lambda x: x is None, [fname, lname, state, county, cont_id])):
+        if any(map(lambda x: x is None, [first_name_p, last_name_p, state_p, county_p, cont_id])):
             return Response(
-                {'detail': 'Please, specify all query params (fname, lname, state, county, cont_id)'},
+                {'detail': 'Please, specify all query params (first_name_p, last_name_p, state_p, county_p, cont_id)'},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # http://127.0.0.1:8000/api/v0/test/?fname=robert&lname=garcia&state=nevada&county=clark&cont_id=
         try:
-            resp_data = license_lookup.run(fname, lname, state, county, cont_id)
+            resp_data = license_lookup.run(first_name_p, last_name_p, state_p, county_p, cont_id)
         except:
             resp_data = {}
 
