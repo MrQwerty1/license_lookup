@@ -1,5 +1,5 @@
 upstream lookup-api {
-    server unix:///var/www/lookup-api/uwsgi.sock; # for a file socket
+    server unix:///var/www/license_lookup/uwsgi.sock; # for a file socket
 }
 
 
@@ -14,12 +14,12 @@ server {
     charset utf-8;
 
     location /static {
-        alias /var/www/lookup-api/static_root/;
+        alias /var/www/license_lookup/static_root/;
         add_header Access-Control-Allow-Origin *;
     }
 
     location /media {
-        alias /var/www/lookup-api/media_root/;
+        alias /var/www/license_lookup/media_root/;
     }
 
     location / {
