@@ -11,7 +11,7 @@ schema_view = get_swagger_view(title='Lookup API: Web', urlconf='api.v0.urls', u
 
 urlpatterns = [
 
-    path('docs/', schema_view, name='swagger'),
+    # path('docs/', schema_view, name='swagger'),
 
     # region Auth
     # endregion

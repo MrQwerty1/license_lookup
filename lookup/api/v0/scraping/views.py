@@ -22,5 +22,9 @@ class LicenseLookupView(APIView):
             )
 
         # http://127.0.0.1:8000/api/v0/test/?fname=robert&lname=garcia&state=nevada&county=clark&cont_id=
-        resp_data = license_lookup.run(fname, lname, state, county, cont_id)
+        try:
+            resp_data = license_lookup.run(fname, lname, state, county, cont_id)
+        except:
+            resp_data = {}
+
         return Response(resp_data)
