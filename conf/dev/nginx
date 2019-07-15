@@ -1,0 +1,30 @@
+upstream lookup-api {
+    server unix:///var/www/lookup-api/uwsgi.sock; # for a file socket
+}
+
+
+server {
+
+    # listen 80;
+    # server_name some.domain.com;
+    listen 9000;
+    server_name _;
+
+    client_max_body_size 0;
+    charset utf-8;
+
+    location /static {
+        alias /var/www/lookup-api/static_root/;
+        add_header Access-Control-Allow-Origin *;
+    }
+
+    location /media {
+        alias /var/www/lookup-api/media_root/;
+    }
+
+    location / {
+        uwsgi_pass lookup-api;
+        include uwsgi_params;
+    }
+
+}
